@@ -1,2 +1,2 @@
 # domain-checker
-Web implementation of `domain-checker-js` npm module.
+Web implementation of [@skiddph/domain-checker](https://www.npmjs.com/package/@skiddph/domain-checker) npm module.
