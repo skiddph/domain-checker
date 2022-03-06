@@ -1,27 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka&display=swap');
 @import '@/styles/variables.scss';
 @tailwind base;
-@tailwind components;
-@tailwind utilities;
 
-@layer base {
-  #app {
-		font-family: Avenir, Helvetica, Arial, sans-serif;
-		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
-		text-align: left;
-		color: #2c3e50;
-		min-height: 100vh;
-	}
-	
-	html, body {
-		margin: 0;
-		padding: 0;
-		border: 0;
-		box-sizing: border-box;
-	}
+#app {
+	font-family: Avenir, Helvetica, Arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-align: left;
+	color: #2c3e50;
+	min-height: 100vh;
+}
 
-  * {
-    user-select: none;
-  }
+html, body {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	box-sizing: border-box;
+}
+
+* {
+	user-select: none;
 }
