@@ -13,7 +13,7 @@
 <style lang="scss" scoped>
 @import '@/styles/variables.scss';
   .w {
-    @apply w-full sticky top-0 z-50 bg-white shadow-lg flex flex-row items-center justify-center;
+    @apply w-full sticky top-0 z-50 bg-white border-b flex flex-row items-center justify-center;
 
     .c {
       @apply w-full flex flex-row items-center justify-between py-3 px-4;
