@@ -7,12 +7,10 @@
 </template>
 <style lang="scss" scoped>
 @import '@/styles/variables.scss';
-
 .w {
   @apply w-full flex flex-row items-center justify-center;
-
   .c {
-    @apply w-full py-8 px-4;
+    @apply w-full py-8 px-2;
     max-width: $max-width;
     min-height: 50vh;
   }
