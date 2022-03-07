@@ -1,8 +1,8 @@
 <template>
-  <div class="__domain-checker__component__header-wrapper">
-    <div class="container">
+  <div class="w">
+    <div class="c">
       <div class="brand">
-        <div class="logo">
+        <div class="l">
           <img src="/logo.png" alt="logo">
           <h1>Domain Checker</h1>
         </div>
@@ -12,14 +12,14 @@
 </template>
 <style lang="scss" scoped>
 @import '@/styles/variables.scss';
-  .__domain-checker__component__header-wrapper {
-    @apply w-full sticky top-0 z-50 bg-white shadow-lg flex flex-row items-center justify-center;
+  .w {
+    @apply w-full sticky top-0 z-50 bg-white border-b flex flex-row items-center justify-center;
 
-    .container {
+    .c {
       @apply w-full flex flex-row items-center justify-between py-3 px-4;
       max-width: $max-width;
 
-      .logo {
+      .l {
         @apply flex flex-row items-center;
 
         img {
