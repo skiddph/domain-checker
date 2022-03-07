@@ -1,15 +1,12 @@
 <script setup>
-import { ref, watchEffect, watch } from 'vue'
-import check from '@skiddph/domain-checker'
+import { ref, watch } from 'vue'
+import { vendors, domainChecker as check } from '@skiddph/domain-checker'
 
 const emit = defineEmits([ 'loading', 'state' ])
 
 // primary
 const search = ref("")
-const vendors = ref([
-  "freenom"
-])
-const vendor = ref(vendors.value[0])
+const vendor = ref(vendors[ 0 ])
 
 // check vars
 const loading = ref(false)
@@ -30,7 +27,7 @@ function clearQuery() {
   })
 }
 
-watch([error, success], () => {
+watch([ error, success ], () => {
   emit('state', {
     error,
     success,
@@ -52,28 +49,35 @@ const sbH = async () => {
     return
   }
 
-  loading.value = true
-  return await check(search.value)[ vendor.value ]()
-    .then(e => {
-      if (e.success) {
-        success.value = true
-        error.value = false
-        result.value = e.result
-        website.value = e.website
-        title.value = e.title
-        count.value = e.result.length
-      } else if (e.error) {
+  try {
+    loading.value = true
+    return await check(search.value)[ vendor.value ]({ cors: "https://cors-anywhere.herokuapp.com/" })
+      .then(e => {
+        if (e.success) {
+          success.value = true
+          error.value = false
+          result.value = e.result
+          website.value = e.website
+          title.value = e.title
+          count.value = e.result.length
+        } else if (e.error) {
+          error.value = true
+          success.value = false
+          message.value = e.message
+        } else throw new Error()
+      })
+      .catch(() => {
         error.value = true
         success.value = false
-        message.value = e.message
-      } else throw new Error()
-    })
-    .catch(() => {
-      error.value = true
-      success.value = false
-      message.value = "Unknown error occurred"
-    })
-    .finally(() => loading.value = false)
+        message.value = "Unknown error occurred"
+      })
+      .finally(() => loading.value = false)
+  } catch (e) {
+    error.value = true
+    success.value = false
+    message.value = "Unknown error occurred"
+    loading.value = false
+  }
 }
 
 </script>
@@ -86,7 +90,11 @@ const sbH = async () => {
       </div>
       <div class="a">
         <select v-model="vendor">
-          <option v-for=" v  in vendors" :value="v" :key="v">{{ v }}</option>
+          <option
+            v-for="   v    in vendors"
+            :value="v"
+            :key="v"
+          >{{ v.charAt(0).toUpperCase() + v.slice(1) }}</option>
         </select>
         <button @click="sbH">
           <span>Search</span>
