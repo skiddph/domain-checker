@@ -1,5 +1,4 @@
 <script setup>
-import { defineProps } from 'vue'
 const props = defineProps({
   message: String,
 })
@@ -9,6 +8,9 @@ const props = defineProps({
   <div class="c" >
     <icon icon="triangle-exclamation" />
     <p class="message">{{ message }}</p>
+    <p class="cors">
+      This might be cause by CORS policy issue. Click this <a target="_blank" href="https://cors-anywhere.herokuapp.com/corsdemo">link</a> and request a temporary access and go back here.
+    </p>
   </div>
 </template>
 <style lang="scss" scoped>
@@ -20,7 +22,14 @@ const props = defineProps({
   }
   .message {
     @apply text-base text-gray-700;
-    
+  }
+
+  .cors {
+    @apply text-sm my-12 mx-24 text-center text-gray-500;
+
+    a {
+      @apply text-blue-500 hover:underline;
+    }
   }
 }
 </style>
