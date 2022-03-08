@@ -172,8 +172,8 @@ const sbH = async () => {
         }
 
         button {
-          @apply bg-gray-400 text-gray-900;
-          @apply hover:bg-gray-300 hover:text-gray-900;
+          @apply bg-gray-300 text-gray-900;
+          @apply hover:bg-gray-100;
         }
       }
     }
