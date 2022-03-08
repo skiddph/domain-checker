@@ -16,7 +16,6 @@ const message = ref("")
 const website = ref("")
 const title = ref("")
 const result = ref([])
-const count = ref(0)
 
 watch(loading, (l) => emit('loading', l))
 
@@ -34,7 +33,6 @@ watch([ error, success ], () => {
     search,
     vendor,
     result,
-    count,
     website,
     title,
     message
@@ -59,7 +57,6 @@ const sbH = async () => {
           result.value = e.result
           website.value = e.website
           title.value = e.title
-          count.value = e.result.length
         } else if (e.error) {
           error.value = true
           success.value = false
