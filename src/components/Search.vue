@@ -91,7 +91,7 @@ const sbH = async () => {
       <div class="a">
         <select v-model="vendor">
           <option
-            v-for="   v    in vendors"
+            v-for="       v        in vendors"
             :value="v"
             :key="v"
           >{{ v.charAt(0).toUpperCase() + v.slice(1) }}</option>
@@ -110,7 +110,7 @@ const sbH = async () => {
   @apply w-full flex flex-row items-center justify-center;
   .c {
     @apply w-full flex flex-col md:flex-row  rounded-lg;
-    @apply md:rounded-full md:focus-within:border-gray-700 transition-all duration-200 mb-4;
+    @apply md:rounded-full transition-all duration-200 mb-4;
     max-width: $max-width;
 
     .s {
@@ -154,6 +154,34 @@ const sbH = async () => {
 
         svg {
           @apply text-sm;
+        }
+      }
+    }
+  }
+}
+
+.dark {
+  .w {
+    .c {
+      .s {
+        @apply border-gray-600;
+        input[type="text"] {
+          @apply text-gray-300;
+        }
+        svg {
+          @apply text-gray-600 hover:text-gray-400;
+        }
+      }
+
+      .a {
+        select {
+          @apply border-gray-600 text-gray-400 hover:text-gray-300;
+          @apply focus:text-gray-300 active:text-gray-300 bg-gray-900;
+        }
+
+        button {
+          @apply bg-gray-400 text-gray-900;
+          @apply hover:bg-gray-300 hover:text-gray-900;
         }
       }
     }
