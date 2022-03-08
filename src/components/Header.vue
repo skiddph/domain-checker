@@ -37,14 +37,12 @@
   .w {
     @apply bg-gray-900 border-gray-600;
     .c {
-
-    .l {
-
-      h1 {
-        @apply text-gray-300;
+      .l {
+        h1 {
+          @apply text-gray-300;
+        }
       }
     }
-  }
   }
 }
 </style>
