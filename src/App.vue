@@ -25,13 +25,27 @@ const lH = (e) => {
 };
 const sH = (e) => Object.keys(e).forEach(k => state[ k ] = e[ k ])
 
+window.darkMode = function(){
+  document.body.querySelector('#app').className = 'dark'
+}
+
+window.lightMode = function(){
+  document.body.querySelector('#app').className = ''
+}
+
+darkMode()
 </script>
 
 <template>
   <Header />
   <Main>
     <Search @loading="lH" @state="sH" />
-    <Result v-if="state.success && !l" :items="state.result" :title="state.title" :website="state.website" />
+    <Result
+      v-if="state.success && !l"
+      :items="state.result"
+      :title="state.title"
+      :website="state.website"
+    />
     <Error v-if="state.error && !l" :message="state.message" />
     <Fallback v-if="!state.success && !state.error && !l" />
     <Loading v-if="l" />
