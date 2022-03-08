@@ -136,14 +136,6 @@ const sbH = async () => {
         @apply transition-all duration-200 outline-none cursor-pointer;
       }
 
-      & > svg {
-        @apply hidden md:block bg-inherit p-2 rounded-full text-base;
-        @apply bg-blue-500 border border-blue-500 text-blue-100;
-        @apply hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-700;
-        @apply hover:border-blue-700 focus:border-blue-700 active:border-blue-700;
-        @apply transition-all duration-200 cursor-pointer;
-      }
-
       button {
         @apply flex flex-row items-center justify-center;
         @apply bg-blue-500 text-blue-100 py-2 px-4 text-base rounded-lg md:rounded-full;
