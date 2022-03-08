@@ -26,7 +26,7 @@ const props = defineProps({
           <b>Price</b>
         </span>
       </div>
-      <div class="i" v-for="( i, k ) in items" :key="k">
+      <div class="i" v-for="(i, k) in items" :key="k">
         <icon icon="circle" :class="i.available ? 't' : 'f'" />
         <span class="d">{{ i.sld }}{{ i.tld }}</span>
         <span class="p">{{ i.currency }} {{ i.price }}</span>
@@ -78,6 +78,48 @@ const props = defineProps({
       }
       .p {
         @apply text-gray-500 px-4;
+      }
+    }
+  }
+}
+.dark {
+  .c {
+    .r {
+      span {
+        @apply text-gray-400;
+      }
+      .rc {
+        @apply text-gray-300;
+      }
+      .l {
+        a {
+          @apply text-blue-400;
+        }
+      }
+    }
+
+    .is {
+      @apply border-gray-600;
+      .i {
+        &:not(:last-child) {
+          @apply border-gray-600;
+        }
+        svg {
+          @apply border-gray-600 text-green-100;
+          &.t {
+            @apply text-green-500;
+          }
+
+          &.f {
+            @apply text-red-500;
+          }
+        }
+        .d {
+          @apply flex-1 text-gray-300 px-4;
+        }
+        .p {
+          @apply text-gray-400 px-4;
+        }
       }
     }
   }
