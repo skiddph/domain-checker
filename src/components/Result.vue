@@ -13,7 +13,7 @@ const props = defineProps({
       <span>Results</span>
       <span class="l">
         Visit website at
-        <a :href="website">{{ title }}</a>
+        <a target="_blank" :href="website">{{ title }}</a>
       </span>
     </div>
     <div class="is">
