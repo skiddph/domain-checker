@@ -6,7 +6,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@skiddph/domain-checker": "^0.0.1",
+    "@skiddph/domain-checker": "^0.0.2",
     "vue": "^3.2.25"
   },
   "devDependencies": {
