@@ -13,7 +13,6 @@ const srt = ref(-1)
 const asc = ref(true)
 
 watchEffect(() => {
-  console.log(sortby, ascending)
   srt.value = sortby
   asc.value = ascending
 })
