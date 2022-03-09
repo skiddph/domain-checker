@@ -30,7 +30,7 @@ if (year < 2022) year = 2022;
 .dark {
   .w {
     .c {
-      @apply border-gray-600;
+      @apply border-blue-400;
     }
   }
 }
