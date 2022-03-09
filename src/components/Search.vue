@@ -153,24 +153,30 @@ const sbH = async () => {
   .w {
     .c {
       .s {
-        @apply border-gray-600;
+        @apply border-blue-400 focus-within:border-blue-200;
         input[type="text"] {
-          @apply text-gray-300;
+          @apply text-blue-400;
+
+          &:focus {
+            @apply text-blue-200
+          }
         }
         svg {
-          @apply text-gray-600 hover:text-gray-400;
+          @apply text-blue-400 hover:text-blue-200;
         }
       }
 
       .a {
         select {
-          @apply border-gray-600 text-gray-400 hover:text-gray-300;
-          @apply focus:text-gray-300 active:text-gray-300 bg-gray-900;
+          @apply border-blue-400 text-blue-400 hover:text-blue-200;
+          @apply focus:text-blue-200 active:text-blue-200 bg-gray-900;
+          @apply hover:border-blue-200 active:border-blue-200 focus:border-blue-200;
         }
 
         button {
-          @apply bg-gray-300 text-gray-900;
-          @apply hover:bg-gray-100;
+          @apply bg-blue-400 text-gray-900;
+          @apply hover:bg-blue-200;
+          @apply focus:bg-blue-200;
         }
       }
     }
