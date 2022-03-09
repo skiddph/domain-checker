@@ -16,7 +16,6 @@ const oflt = ref(false)
 const fls = [ 'Availability', 'Domain', 'Currency', 'Price' ]
 
 const fH = (e) => {
-  console.log(e)
   oflt.value = false
   srt.value = e.sortby
   asc.value = e.ascending
@@ -58,13 +57,10 @@ const calc = (raw) => {
     try {
       const param = i === 0 ? raw : res[ i - 1 ]
       res.push(pipes[ i ](param))
-      console.log('Pipe', (i + 1), 'OK', param)
     } catch (e) {
-      console.log('Pipe', (i + 1), 'FAIL')
       return null
     }
   }
-  console.log('Pipe', res.length, 'Result:', res[ res.length - 1 ])
   return res[ res.length - 1 ]
 }
 
