@@ -96,7 +96,7 @@ watchEffect(() => {
         <th>Domain</th>
         <th>Price</th>
       </thead>
-      <tr v-for="(    r, i    ) in result" :key="i" :class="r[ 0 ] ? '' : 'ua'">
+      <tr v-for="(r, i) in result" :key="i" :class="r[ 0 ] ? '' : 'ua'" :title="r[1]">
         <td>{{ r[ 1 ] }}</td>
         <td>{{ r[ 2 ] }} {{ r[ 3 ] }}</td>
       </tr>
