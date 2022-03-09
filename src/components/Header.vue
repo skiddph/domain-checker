@@ -44,7 +44,7 @@ watch(dm, (e) => e ? darkMode() : lightMode())
     .toggle {
       .dmt {
         @apply text-xl cursor-pointer p-2 bg-inherit rounded-full;
-        @apply hover:bg-gray-900 hover:text-gray-100;
+        @apply hover:bg-gray-700 hover:text-gray-100;
         @apply transition-all duration-200;
       }
     }
