@@ -1,5 +1,5 @@
 <script setup>
-import { watch, ref, watchEffect, computed } from 'vue'
+import { ref, watchEffect } from 'vue'
 import Filter from '@/components/Filter.vue'
 
 const { items, website, title } = defineProps({
@@ -74,7 +74,15 @@ watchEffect(() => {
 
 </script>
 <template>
-  <Filter v-if="oflt" @close="oflt = false" :items="fls" @filter="fH" @clear="fcH" :ascending="asc" :sortby="srt" />
+  <Filter
+    v-if="oflt"
+    @close="oflt = false"
+    :items="fls"
+    @filter="fH"
+    @clear="fcH"
+    :ascending="asc"
+    :sortby="srt"
+  />
   <div class="c">
     <div class="r">
       <span class="rc">{{ items.length }}</span>
@@ -92,7 +100,7 @@ watchEffect(() => {
         <th>Domain</th>
         <th>Price</th>
       </thead>
-      <tr v-for="( r, i ) in result" :key="i" :class="r[ 0 ] ? '' : 'ua'">
+      <tr v-for="(  r, i  ) in result" :key="i" :class="r[ 0 ] ? '' : 'ua'">
         <td>{{ r[ 1 ] }}</td>
         <td>{{ r[ 2 ] }} {{ r[ 3 ] }}</td>
       </tr>
