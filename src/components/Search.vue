@@ -82,18 +82,18 @@ const sbH = async () => {
   <div class="w">
     <div action="#" class="c">
       <div class="s">
-        <input type="text" placeholder="example.com or example" v-model="search" />
+        <input type="text" placeholder="example.com or example" v-model="search" title="Search query text input" />
         <icon icon="x" @click="clearQuery" />
       </div>
       <div class="a">
-        <select v-model="vendor">
+        <select v-model="vendor" title="vendors">
           <option
-            v-for="       v        in vendors"
+            v-for="v in vendors"
             :value="v"
             :key="v"
           >{{ v.charAt(0).toUpperCase() + v.slice(1) }}</option>
         </select>
-        <button @click="sbH">
+        <button @click="sbH" title="Search button">
           <span>Search</span>
           <icon icon="magnifying-glass" />
         </button>
