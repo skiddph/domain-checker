@@ -39,7 +39,7 @@
     .c {
       .l {
         h1 {
-          @apply text-gray-300;
+          @apply text-blue-200;
         }
       }
     }
