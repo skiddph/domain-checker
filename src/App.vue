@@ -15,27 +15,13 @@ const state = reactive({
   success: false,
   search: false,
   result: [],
-  count: 0,
   website: "",
+  title: ""
 })
 
-const lH = (e) => {
-  console.log('loading', e)
-  l.value = e
-};
+const lH = (e) => l.value = e
 const sH = (e) => Object.keys(e).forEach(k => state[ k ] = e[ k ])
-
-window.darkMode = function(){
-  document.body.querySelector('#app').className = 'dark'
-}
-
-window.lightMode = function(){
-  document.body.querySelector('#app').className = ''
-}
-
-darkMode()
 </script>
-
 <template>
   <Header />
   <Main>
