@@ -96,7 +96,7 @@ watchEffect(() => {
         <th>Domain</th>
         <th>Price</th>
       </thead>
-      <tr v-for="(  r, i  ) in result" :key="i" :class="r[ 0 ] ? '' : 'ua'">
+      <tr v-for="(    r, i    ) in result" :key="i" :class="r[ 0 ] ? '' : 'ua'">
         <td>{{ r[ 1 ] }}</td>
         <td>{{ r[ 2 ] }} {{ r[ 3 ] }}</td>
       </tr>
@@ -105,12 +105,12 @@ watchEffect(() => {
 </template>
 <style lang="scss" scoped>
 .c {
-  @apply w-full flex flex-col items-start justify-center mt-4;
+  @apply w-full flex flex-col items-center justify-center mt-4;
 
   .r {
     @apply w-full mb-1 flex flex-row items-center justify-center;
     .f {
-      @apply text-sm px-4 font-semibold hover:underline text-gray-600;
+      @apply text-sm mx-2 px-2 font-semibold rounded hover:underline text-gray-600;
       svg {
         @apply mr-1;
       }
@@ -159,13 +159,13 @@ watchEffect(() => {
   .c {
     .r {
       .f {
-        @apply text-gray-300;
+        @apply text-blue-100 font-normal;
       }
       span {
         @apply text-gray-400;
       }
       .rc {
-        @apply text-gray-300;
+        @apply text-blue-100;
       }
       .l {
         a {
@@ -175,18 +175,18 @@ watchEffect(() => {
     }
   }
   table {
-    @apply border-gray-600 text-gray-400;
+    @apply border-blue-400 text-blue-200;
 
     th {
-      @apply text-gray-300;
+      @apply text-blue-400;
     }
 
-    .ua {
-      @apply text-red-400;
-    }
+    tr, thead {
+      @apply border-gray-800;
 
-    tr {
-      @apply border-gray-500;
+      &.ua {
+        @apply text-red-400;
+      }
     }
   }
 }
