@@ -29,7 +29,7 @@ window.getAppMode = function () {
   const dark = (
     localStorage.getItem('darkMode') !== null ?
       localStorage.getItem('darkMode') == 'true' :
-      null
+      (window?.matchMedia && window?.matchMedia('(prefers-color-scheme: dark)')?.matches)
   ) || false;
   console.log('dark', dark)
   if (dark == true) darkMode();
