@@ -1,45 +1,120 @@
 <script setup>
-import { watch, ref } from 'vue'
-const props = defineProps({
+import { ref, watchEffect } from 'vue'
+import Filter from '@/components/Filter.vue'
+
+const { items, website, title } = defineProps({
   items: Array,
   website: String,
   title: String,
 })
+
+const raw = ref(items)
+const result = ref([])
+const srt = ref(-1)
+const asc = ref(true)
+const oflt = ref(false)
+const fls = [ 'Availability', 'Domain', 'Currency', 'Price' ]
+
+const fH = (e) => {
+  oflt.value = false
+  srt.value = e.sortby
+  asc.value = e.ascending
+  result.value = calc(raw.value)
+}
+
+const fcH = () => {
+  oflt.value = false
+  srt.value = -1
+  asc.value = true
+  result.value = calc(raw.value)
+}
+
+const pipes = [
+  // to array
+  (is) => {
+    const res = []
+    for (let i of is) res.push([ i.available, i.sld + i.tld, i.currency, i.price ])
+    return res
+  },
+  // sort
+  (is) => {
+    if (srt.value >= 0) is.sort((a, b) => {
+      if (a[ srt.value ] > b[ srt.value ]) {
+        return asc.value ? 1 : -1
+      } else if (a[ srt.value ] < b[ srt.value ]) {
+        return asc.value ? -1 : 1
+      } else {
+        return 0
+      }
+    })
+    return is
+  }
+]
+
+const calc = (raw) => {
+  const res = []
+  for (let i = 0; i < pipes.length; i++) {
+    try {
+      const param = i === 0 ? raw : res[ i - 1 ]
+      res.push(pipes[ i ](param))
+    } catch (e) {
+      return null
+    }
+  }
+  return res[ res.length - 1 ]
+}
+
+watchEffect(() => {
+  result.value = calc(raw.value)
+})
+
 </script>
 <template>
+  <Filter
+    v-if="oflt"
+    @close="oflt = false"
+    :items="fls"
+    @filter="fH"
+    @clear="fcH"
+    :ascending="asc"
+    :sortby="srt"
+  />
   <div class="c">
     <div class="r">
       <span class="rc">{{ items.length }}</span>
       <span>Results</span>
+      <button class="f" @click="oflt = !!!oflt">
+        <icon icon="filter" />Filter
+      </button>
       <span class="l">
         Visit website at
-        <a :href="website">{{ title }}</a>
+        <a target="_blank" :href="website">{{ title }}</a>
       </span>
     </div>
-    <div class="is">
-      <div class="i">
-        <icon icon="circle" />
-        <span class="d">
-          <b>Domain</b>
-        </span>
-        <span class="p">
-          <b>Price</b>
-        </span>
-      </div>
-      <div class="i" v-for="( i, k ) in items" :key="k">
-        <icon icon="circle" :class="i.available ? 't' : 'f'" />
-        <span class="d">{{ i.sld }}{{ i.tld }}</span>
-        <span class="p">{{ i.currency }} {{ i.price }}</span>
-      </div>
-    </div>
+    <table>
+      <thead>
+        <th>Domain</th>
+        <th>Price</th>
+      </thead>
+      <tr v-for="(r, i) in result" :key="i" :class="r[ 0 ] ? '' : 'ua'" :title="r[1]">
+        <td>{{ r[ 1 ] }}</td>
+        <td>{{ r[ 2 ] }} {{ r[ 3 ] }}</td>
+      </tr>
+    </table>
   </div>
 </template>
 <style lang="scss" scoped>
 .c {
-  @apply w-full flex flex-col items-start justify-center mt-4;
+  @apply w-full flex flex-col items-center justify-center mt-4;
 
   .r {
-    @apply w-full mb-2 flex flex-row items-center justify-center;
+    @apply w-full mb-1 flex flex-row items-center justify-center;
+    .f {
+      @apply text-sm mx-2 px-2 font-semibold rounded hover:underline text-gray-600;
+      svg {
+        @apply mr-1;
+      }
+    }
     span {
       @apply text-gray-500;
     }
@@ -54,30 +129,63 @@ const props = defineProps({
       }
     }
   }
+  table {
+    @apply w-full border-t border-gray-300 text-gray-700;
+    border-collapse: collapse;
 
-  .is {
-    @apply w-full border border-gray-300;
-    .i {
-      @apply flex flex-row items-center justify-start;
+    th {
+      @apply px-2 py-2 text-gray-700;
+    }
 
-      &:not(:last-child) {
-        @apply border-b border-gray-300;
+    td {
+      @apply px-2 py-1;
+    }
+
+    .ua {
+      @apply text-red-400;
+    }
+
+    td:last-child,
+    th:last-child {
+      @apply text-right;
+    }
+
+    tr {
+      @apply border-t border-gray-200;
+    }
+  }
+}
+.dark {
+  .c {
+    .r {
+      .f {
+        @apply text-blue-100 font-normal;
       }
-      svg {
-        @apply h-2 border-r border-gray-300 px-4 py-4 md:py-3;
-        &.t {
-          @apply text-green-500;
+      span {
+        @apply text-gray-400;
+      }
+      .rc {
+        @apply text-blue-100;
+      }
+      .l {
+        a {
+          @apply text-blue-400;
         }
+      }
+    }
+  }
+  table {
+    @apply border-blue-400 text-blue-200;
 
-        &.f {
-          @apply text-red-500;
-        }
-      }
-      .d {
-        @apply flex-1 text-gray-700 px-4;
-      }
-      .p {
-        @apply text-gray-500 px-4;
+    th {
+      @apply text-blue-400;
+    }
+
+    tr, thead {
+      @apply border-gray-800;
+
+      &.ua {
+        @apply text-red-400;
       }
     }
   }

@@ -9,6 +9,10 @@
 	text-align: left;
 	color: #2c3e50;
 	min-height: 100vh;
+
+	&.dark {
+		@apply bg-gray-900;
+	}
 }
 
 html, body {

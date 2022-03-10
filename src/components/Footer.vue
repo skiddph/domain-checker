@@ -26,4 +26,12 @@ if (year < 2022) year = 2022;
     font-size: 0.8rem;
   }
 }
+
+.dark {
+  .w {
+    .c {
+      @apply border-blue-400;
+    }
+  }
+}
 </style>

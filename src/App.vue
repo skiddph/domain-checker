@@ -15,23 +15,23 @@ const state = reactive({
   success: false,
   search: false,
   result: [],
-  count: 0,
   website: "",
+  title: ""
 })
 
-const lH = (e) => {
-  console.log('loading', e)
-  l.value = e
-};
+const lH = (e) => l.value = e
 const sH = (e) => Object.keys(e).forEach(k => state[ k ] = e[ k ])
-
 </script>
-
 <template>
   <Header />
   <Main>
     <Search @loading="lH" @state="sH" />
-    <Result v-if="state.success && !l" :items="state.result" :title="state.title" :website="state.website" />
+    <Result
+      v-if="state.success && !l"
+      :items="state.result"
+      :title="state.title"
+      :website="state.website"
+    />
     <Error v-if="state.error && !l" :message="state.message" />
     <Fallback v-if="!state.success && !state.error && !l" />
     <Loading v-if="l" />

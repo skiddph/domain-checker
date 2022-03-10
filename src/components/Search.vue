@@ -16,7 +16,6 @@ const message = ref("")
 const website = ref("")
 const title = ref("")
 const result = ref([])
-const count = ref(0)
 
 watch(loading, (l) => emit('loading', l))
 
@@ -34,7 +33,6 @@ watch([ error, success ], () => {
     search,
     vendor,
     result,
-    count,
     website,
     title,
     message
@@ -59,7 +57,6 @@ const sbH = async () => {
           result.value = e.result
           website.value = e.website
           title.value = e.title
-          count.value = e.result.length
         } else if (e.error) {
           error.value = true
           success.value = false
@@ -85,18 +82,18 @@ const sbH = async () => {
   <div class="w">
     <div action="#" class="c">
       <div class="s">
-        <input type="text" placeholder="example.com or example" v-model="search" />
+        <input type="text" placeholder="example.com or example" v-model="search" title="Search query text input" />
         <icon icon="x" @click="clearQuery" />
       </div>
       <div class="a">
-        <select v-model="vendor">
+        <select v-model="vendor" title="vendors">
           <option
-            v-for="   v    in vendors"
+            v-for="v in vendors"
             :value="v"
             :key="v"
           >{{ v.charAt(0).toUpperCase() + v.slice(1) }}</option>
         </select>
-        <button @click="sbH">
+        <button @click="sbH" title="Search button">
           <span>Search</span>
           <icon icon="magnifying-glass" />
         </button>
@@ -110,7 +107,7 @@ const sbH = async () => {
   @apply w-full flex flex-row items-center justify-center;
   .c {
     @apply w-full flex flex-col md:flex-row  rounded-lg;
-    @apply md:rounded-full md:focus-within:border-gray-700 transition-all duration-200 mb-4;
+    @apply md:rounded-full transition-all duration-200 mb-4;
     max-width: $max-width;
 
     .s {
@@ -136,14 +133,6 @@ const sbH = async () => {
         @apply transition-all duration-200 outline-none cursor-pointer;
       }
 
-      & > svg {
-        @apply hidden md:block bg-inherit p-2 rounded-full text-base;
-        @apply bg-blue-500 border border-blue-500 text-blue-100;
-        @apply hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-700;
-        @apply hover:border-blue-700 focus:border-blue-700 active:border-blue-700;
-        @apply transition-all duration-200 cursor-pointer;
-      }
-
       button {
         @apply flex flex-row items-center justify-center;
         @apply bg-blue-500 text-blue-100 py-2 px-4 text-base rounded-lg md:rounded-full;
@@ -154,6 +143,40 @@ const sbH = async () => {
 
         svg {
           @apply text-sm;
+        }
+      }
+    }
+  }
+}
+
+.dark {
+  .w {
+    .c {
+      .s {
+        @apply border-blue-400 focus-within:border-blue-200;
+        input[type="text"] {
+          @apply text-blue-400;
+
+          &:focus {
+            @apply text-blue-200
+          }
+        }
+        svg {
+          @apply text-blue-400 hover:text-blue-200;
+        }
+      }
+
+      .a {
+        select {
+          @apply border-blue-400 text-blue-400 hover:text-blue-200;
+          @apply focus:text-blue-200 active:text-blue-200 bg-gray-900;
+          @apply hover:border-blue-200 active:border-blue-200 focus:border-blue-200;
+        }
+
+        button {
+          @apply bg-blue-400 text-gray-900;
+          @apply hover:bg-blue-200;
+          @apply focus:bg-blue-200;
         }
       }
     }
